@@ -3,5 +3,7 @@
 
     <string name="hello">Hello World, SpeakingEnglishActivity!</string>
     <string name="app_name">SpeakingEnglish</string>
+    <string name="error_xml_file">XML file corrupted!</string>
+    <string name="error_parsing_xml">Cannot parse XML file!</string>
 
 </resources>
