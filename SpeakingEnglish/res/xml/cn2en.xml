@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<expressions>
+    <expression>
+        <cn>你好！</cn>
+        <en>How are you!</en>
+    </expression>
+    <expression>
+        <cn>谢谢！</cn>
+        <en>Thank you!</en>
+    </expression>
+    <expression>
+        <cn>早上好！</cn>
+        <en>Good morning!</en>
+    </expression>
+    <expression>
+        <cn>周末愉快！</cn>
+        <en>Nice weekend!</en>
+    </expression>
+    <expression>
+        <cn>今天天气不错！</cn>
+        <en>It's nice today!</en>
+    </expression>
+</expressions>
