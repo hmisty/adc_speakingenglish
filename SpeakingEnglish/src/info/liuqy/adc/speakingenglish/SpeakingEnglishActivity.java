@@ -1,7 +1,9 @@
 package info.liuqy.adc.speakingenglish;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -9,9 +11,14 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
 public class SpeakingEnglishActivity extends ListActivity {
-	
+
+    List<String> cns = new ArrayList<String>();
+    ArrayAdapter<String> adapter;
+    
 	//all expressions cn => en
 	Map<String, String> exprs = null;
 	
@@ -61,6 +68,23 @@ public class SpeakingEnglishActivity extends ListActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        try {
+            exprs = loadExpressionsFromXml(R.xml.cn2en);
+        } catch (IOException e) {
+            Toast.makeText(this, R.string.error_xml_file, Toast.LENGTH_SHORT);
+        } catch (XmlPullParserException e) {
+            Toast.makeText(this, R.string.error_parsing_xml, Toast.LENGTH_SHORT);
+        }
+
+        adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, cns);
+        this.setListAdapter(adapter);
+
+        for (String cn : exprs.keySet()) {
+            cns.add(cn);
+        }
+//        adapter.notifyDataSetChanged();
     }
     
     private Map<String, String> loadExpressionsFromXml(int resourceId) throws XmlPullParserException, IOException {
