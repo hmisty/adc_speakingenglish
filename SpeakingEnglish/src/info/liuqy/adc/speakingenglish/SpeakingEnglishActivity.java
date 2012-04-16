@@ -11,7 +11,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SpeakingEnglishActivity extends ListActivity {
@@ -85,6 +88,17 @@ public class SpeakingEnglishActivity extends ListActivity {
             cns.add(cn);
         }
 //        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
+        TextView tv = (TextView)v;
+        String text = tv.getText().toString();
+        if (exprs.containsKey(text)) //Chinese displayed now
+            tv.setText(exprs.get(text));
+        else //English displayed now, refresh the display
+            adapter.notifyDataSetChanged();
     }
     
     private Map<String, String> loadExpressionsFromXml(int resourceId) throws XmlPullParserException, IOException {
