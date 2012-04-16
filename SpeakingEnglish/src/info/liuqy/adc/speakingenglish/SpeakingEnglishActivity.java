@@ -1,12 +1,19 @@
 package info.liuqy.adc.speakingenglish;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.ListActivity;
 import android.os.Bundle;
 
 public class SpeakingEnglishActivity extends ListActivity {
+	
+	//all expressions cn => en
+	Map<String, String> exprs = null;
 	
     private class DFA {
         private static final int INIT_STATE = 0, EXPR_TAG = 1, CN_TAG = 2, EN_TAG = 3, CN_TEXT = 4, EN_TEXT = 5, PRE_FINAL = 6, FINAL_STATE = 7;
@@ -55,4 +62,35 @@ public class SpeakingEnglishActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
     }
+    
+    private Map<String, String> loadExpressionsFromXml(int resourceId) throws XmlPullParserException, IOException {
+        Map<String, String> exprs = new HashMap<String, String>();
+        XmlPullParser xpp = getResources().getXml(resourceId);
+        DFA dfa = new DFA();
+        String cn = null, en = null;
+        while (xpp.getEventType() != XmlPullParser.END_DOCUMENT) {
+            if (xpp.getEventType() == XmlPullParser.START_TAG) {
+                dfa.nextState(xpp.getName());
+            }
+            else if (xpp.getEventType() == XmlPullParser.TEXT) {
+                int state = dfa.nextState("text");
+                if (state == DFA.CN_TEXT)
+                    cn = xpp.getText();
+                else if (state == DFA.EN_TEXT)
+                    en = xpp.getText();
+                else if (state == DFA.FINAL_STATE) {
+                    if (cn == null)
+                        cn = xpp.getText();
+                    else if (en == null)
+                        en = xpp.getText();
+                    exprs.put(cn, en);
+                    dfa.reset();
+                    cn = en = null;
+                }
+            }
+            xpp.next();
+        }
+        return exprs;
+    }
+
 }
