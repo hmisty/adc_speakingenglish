@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,6 +27,11 @@ import android.widget.Toast;
 public class SpeakingEnglishActivity extends ListActivity {
 
     public static final int RATING_ACTION = 0;
+    public static final int EDIT_ACTION = 1;
+    static final String ACTION = "info.liuqy.adc.easynote.EDIT";
+    static final String TITLE = "title";
+    static final String BODY = "body";
+
     List<String> cns = new ArrayList<String>();
     ArrayAdapter<String> adapter;
     
@@ -176,6 +182,22 @@ public class SpeakingEnglishActivity extends ListActivity {
         MenuInflater inf = this.getMenuInflater();
         inf.inflate(R.menu.ctx_menu, menu);
         super.onCreateContextMenu(menu, v, menuInfo);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.edit_todo) {
+            AdapterContextMenuInfo info = (AdapterContextMenuInfo)item.getMenuInfo();
+            int idx = info.position;
+            String cn = cns.get(idx);
+            String en = exprs.get(cn);
+            
+            Intent i = new Intent(ACTION);
+            i.putExtra(TITLE, cn);
+            i.putExtra(BODY, en);
+            startActivityForResult(i, EDIT_ACTION); //requestCode is only for the caller to distinguish the requests
+        }
+        return super.onContextItemSelected(item);
     }
 
 }
