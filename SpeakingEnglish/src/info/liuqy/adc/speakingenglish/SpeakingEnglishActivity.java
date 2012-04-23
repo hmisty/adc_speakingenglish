@@ -96,13 +96,17 @@ public class SpeakingEnglishActivity extends ListActivity {
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, cns);
         this.setListAdapter(adapter);
-
+        refreshList();
+        
+        this.registerForContextMenu(getListView());
+    }
+    
+    private void refreshList() {
+    	cns.clear();
         for (String cn : exprs.keySet()) {
             cns.add(cn);
         }
-//        adapter.notifyDataSetChanged();
-        
-        this.registerForContextMenu(getListView());
+        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -178,7 +182,7 @@ public class SpeakingEnglishActivity extends ListActivity {
             String cn = data.getStringExtra(TITLE);
             String en = data.getStringExtra(BODY);
             exprs.put(cn, en);
-            adapter.notifyDataSetChanged();
+            refreshList();
         }
 
     }
