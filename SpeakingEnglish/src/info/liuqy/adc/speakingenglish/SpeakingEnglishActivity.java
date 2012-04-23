@@ -10,7 +10,11 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.ListActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -129,6 +133,22 @@ public class SpeakingEnglishActivity extends ListActivity {
             xpp.next();
         }
         return exprs;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inf = this.getMenuInflater();
+        inf.inflate(R.menu.opt_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.show_about) {
+            Intent i = new Intent(this, AboutActivity.class);
+            this.startActivity(i);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
