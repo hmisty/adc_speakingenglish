@@ -12,5 +12,6 @@
     </string>
     <string name="about">About</string>
     <string name="we_are_NB">%1$.1f is the NB-est among the universe!</string>
-    
+    <string name="edit">Edit</string>
+        
 </resources>
