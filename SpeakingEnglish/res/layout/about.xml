@@ -16,6 +16,13 @@
             android:text="@string/about_us"
             android:textSize="32sp" >
         </TextView>
+
+        <RatingBar
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+        
     </LinearLayout>
 
 </ScrollView>
