@@ -173,7 +173,14 @@ public class SpeakingEnglishActivity extends ListActivity {
                 Toast.makeText(this, String.format(getString(R.string.we_are_NB), rating), Toast.LENGTH_SHORT)
                 .show();
             }
+        } else if (requestCode == SpeakingEnglishActivity.EDIT_ACTION
+                && resultCode == SpeakingEnglishActivity.RESULT_OK) {
+            String cn = data.getStringExtra(TITLE);
+            String en = data.getStringExtra(BODY);
+            exprs.put(cn, en);
+            adapter.notifyDataSetChanged();
         }
+
     }
 
     @Override
