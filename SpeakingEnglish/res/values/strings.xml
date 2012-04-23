@@ -11,5 +11,6 @@
     We are devoting to universal peace and against universal wars between planets.
     </string>
     <string name="about">About</string>
-
+    <string name="we_are_NB">%1$.1f is the NB-est among the universe!</string>
+    
 </resources>

@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 public class SpeakingEnglishActivity extends ListActivity {
 
+    public static final int RATING_ACTION = 0;
     List<String> cns = new ArrayList<String>();
     ArrayAdapter<String> adapter;
     
@@ -149,6 +150,20 @@ public class SpeakingEnglishActivity extends ListActivity {
             this.startActivity(i);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        
+        if (requestCode == SpeakingEnglishActivity.RATING_ACTION
+                && resultCode == SpeakingEnglishActivity.RESULT_OK) {
+            float rating = data.getFloatExtra(AboutActivity.RATING, 0.0f);
+            if (rating >= 3.0f) {
+                Toast.makeText(this, String.format(getString(R.string.we_are_NB), rating), Toast.LENGTH_SHORT)
+                .show();
+            }
+        }
     }
 
 }
