@@ -11,6 +11,7 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -162,7 +163,13 @@ public class SpeakingEnglishActivity extends ListActivity {
         if (item.getItemId() == R.id.show_about) {
             Intent i = new Intent(this, AboutActivity.class);
             this.startActivityForResult(i, SpeakingEnglishActivity.RATING_ACTION);
+        } else if (item.getItemId() == R.id.call_us) {
+            Intent i = new Intent();
+            i.setAction(Intent.ACTION_DIAL);
+            i.setData(Uri.parse("tel:40060088888"));
+            startActivity(i);
         }
+
         return super.onOptionsItemSelected(item);
     }
 
