@@ -12,6 +12,8 @@ import org.xmlpull.v1.XmlPullParserException;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -164,6 +166,14 @@ public class SpeakingEnglishActivity extends ListActivity {
                 .show();
             }
         }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+            ContextMenuInfo menuInfo) {
+        MenuInflater inf = this.getMenuInflater();
+        inf.inflate(R.menu.ctx_menu, menu);
+        super.onCreateContextMenu(menu, v, menuInfo);
     }
 
 }
