@@ -147,7 +147,7 @@ public class SpeakingEnglishActivity extends ListActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.show_about) {
             Intent i = new Intent(this, AboutActivity.class);
-            this.startActivity(i);
+            this.startActivityForResult(i, SpeakingEnglishActivity.RATING_ACTION);
         }
         return super.onOptionsItemSelected(item);
     }
