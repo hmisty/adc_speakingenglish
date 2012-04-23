@@ -95,6 +95,8 @@ public class SpeakingEnglishActivity extends ListActivity {
             cns.add(cn);
         }
 //        adapter.notifyDataSetChanged();
+        
+        this.registerForContextMenu(getListView());
     }
 
     @Override
