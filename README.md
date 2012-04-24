@@ -4,7 +4,7 @@ ADC, Android Development Course, is a series of Android development classes taug
 
 ADC Speaking English
 ---
-ADC Speaking English is the 4th homework of the ADC.
+ADC Speaking English is the 5th homework of the ADC.
 The source code here is a partially finished Android application. The goal for the students is to complete the application as required.
 
 Homework
